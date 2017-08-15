@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Doppler Effect by Catherine Liu</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <style> 
+	#redFilter {
+    background-color: black;
+    border-radius: 50%;
+    width: 155px;
+    height: 155px;
+    position: absolute;
+    top: 135px;
+    left: 140px;
+    z-index: 2;
+    opacity: 0.2;
+}
+
+</style>
+
+</head>
+<body>
+
+
+<div id="redFilter"></div>
+<img id="planet" src="star-small.png"/>
+
+<section style: clear="both">
+<lable>Velocity (km/s):</lable>
+<input id="value" />
+</section>
+
+<div id="colorSlider" style="display:inline">
+     <input id="slider" type="range" value="slider" max="100" min="-100" step="1"/>
+</div>
+
+
+
+<script>
+
+
+$('#value').keyup(function(){
+	var myValue = $('#value').val();
+	if(myValue > 100) {
+		myValue = 100;
+		}
+	if (myValue < -100){
+		myValue = -100;
+		}
+		$('#value').val(myValue);
+						   
+		});
+
+
+
+
+
+
+$(document).ready(function() {
+	$('#value').on('input', function(event) {
+		$('#slider').val($(this).val());
+		 if ($(this).val() > 0) {
+            $('#redFilter').css('background-color', 'rgb('+$(this).val()*2+',0,0)');
+        } else {
+            $('#redFilter').css('background-color', 'rgb(0,0,'+$(this).val()*-2+')');
+        }
+	});
+
+    $('#slider').on('input', function() {
+        console.log($(this).val());
+		$('#value').val($(this).val());
+        if ($(this).val() > 0) {
+            $('#redFilter').css('background-color', 'rgb('+$(this).val()*2+',0,0)');
+        } else {
+            $('#redFilter').css('background-color', 'rgb(0,0,'+$(this).val()*-2+')');
+        }
+    });
+});
+</script>
+
+
+</body>
+</html>
